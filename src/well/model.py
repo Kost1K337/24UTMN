@@ -1,4 +1,3 @@
-import pandas as pd
 import numpy as np
 import pickle
 import shutil
@@ -6,17 +5,17 @@ import os
 
 
 class Well_solver:
-    def __init__(self,name,papka_with_models='wellmodels/',archive_path='wellmodels.zip'):
+    def __init__(self,name,papka_with_models='well/wellmodels/',archive_path='src/well/wellmodels.zip'):
         self.papka_with_models = papka_with_models
         self.name = name
         self.archive_path=archive_path
 
         well_name=self.name
         path = self.papka_with_models+'wellmodel_'+well_name+'.pickle'
-        check_file = os.path.isfile(path)
-        if not check_file:
-          path=self.papka_with_models+'wellmodel_'+well_name+'.pickle'
-          shutil.unpack_archive(self.archive_path,'wellmodels', 'zip')
+        # check_file = os.path.isfile(path)
+        # if not check_file:
+        #   path=self.papka_with_models+'wellmodel_'+well_name+'.pickle'
+        #   shutil.unpack_archive(self.archive_path,'wellmodels', 'zip')
 
         
 
@@ -25,7 +24,7 @@ class Well_solver:
 
         
 
-        with open(path, "rb") as file:
+        with open(papka_with_models+'norm.pickle', "rb") as file:
           self.normalizer = pickle.load(file)
         
         if self.name =='"896Б"':
