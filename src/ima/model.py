@@ -27,27 +27,27 @@ class Solver():
         water_cut = 0.75
         
         while True:
-        #Проходка вперёд
-        for i in self.shema:
-            if len(self.shema[i]['d_j']) == 0:
-                 temple_well = well.Well_solver(self.shema[i]['name'])
-                 self.shema[i]['p'] = temple_well.predict(self.shema[i]['q'], self.shema[i]['q']*10, self.shema[i]['p'], water_cut) 
-                 #дебет жидк, газ факт, давление, обводнёность
-        for i in self.shema:
-            if len(self.shema[i]['d_j']) == 0:
-                 temple_plast = plast.plast(self.date, self.shema[i]['name'], self.shema[i]['p'])
-                 self.shema[i]['q'] = plast.predict()
-        for i in self.shema:
-            if len(self.shema[i]['d_j']) > 0:
-                 for j in self.shema[i]['d_j']:
-                     self.shema[i]['q'] += self.shema[j]['q']
-        #Обратная проходка
-        for i in shema:
-            temple_tube = ssit.SSiTModel(getPipesList()[0])
-            self.shema[i]['p'] = temple_tube.predict([[self.shema[i]['p'], water_cut, self.shema[i]['q'], self.shema[i]['q']*10]])
-            #давление, обводненность, дебит жидкости, газовый фактор
+            #Проходка вперёд
+            for i in self.shema:
+                if len(self.shema[i]['d_j']) == 0:
+                     temple_well = well.Well_solver(self.shema[i]['name'])
+                     self.shema[i]['p'] = temple_well.predict(self.shema[i]['q'], self.shema[i]['q']*10, self.shema[i]['p'], water_cut) 
+                     #дебет жидк, газ факт, давление, обводнёность
+            for i in self.shema:
+                if len(self.shema[i]['d_j']) == 0:
+                     temple_plast = plast.plast(self.date, self.shema[i]['name'], self.shema[i]['p'])
+                     self.shema[i]['q'] = plast.predict()
+            for i in self.shema:
+                if len(self.shema[i]['d_j']) > 0:
+                     for j in self.shema[i]['d_j']:
+                         self.shema[i]['q'] += self.shema[j]['q']
+            #Обратная проходка
+            for i in shema:
+                temple_tube = ssit.SSiTModel(getPipesList()[0])
+                self.shema[i]['p'] = temple_tube.predict([[self.shema[i]['p'], water_cut, self.shema[i]['q'], self.shema[i]['q']*10]])
+                #давление, обводненность, дебит жидкости, газовый фактор
+                
+            if abs(self.Q_sep - self.shema[len(self.shema)]['q']) < self.Eps:
+                return self.shema
             
-        if abs(self.Q_sep - self.shema[len(self.shema)]['q']) < self.Eps:
-            return self.shema
-        
-        self.Q_sep = self.shema[len(shema)]['q'] 
+            self.Q_sep = self.shema[len(shema)]['q'] 
