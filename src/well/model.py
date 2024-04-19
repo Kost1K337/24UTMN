@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import pickle
-class Well_keker:
+class Well_solver:
     def __init__(self,name,papka_with_models='wellmodels/'):
         self.papka_with_models = papka_with_models
         self.name = name
@@ -17,7 +17,7 @@ class Well_keker:
         path=self.papka_with_models+'wellmodel_'+well_name+'.pickle'
         with open(path, "rb") as file:
           self.model = pickle.load(file)
-    #data is 'Дебит жидкости', 'Газовый фактор', 'Буферное давление','Обводненность' in pandas DataFrame
+    #data is 'Дебит жидкости', 'Газовый фактор', 'Буферное давление','Обводненность'
 
     def predict(self,data):
         
