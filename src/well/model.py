@@ -28,10 +28,10 @@ class Well_solver:
         with open(path, "rb") as file:
           self.normalizer = pickle.load(file)
         
-        # if self.name =='"896Б"':
-        #   well_name='_896Б_'
-        # if self.name =='896Б':
-        #   well_name='_896Б_'
+        if self.name =='"896Б"':
+           well_name='_896Б_'
+        if self.name =='896Б':
+          well_name='_896Б_'
 
   
 
