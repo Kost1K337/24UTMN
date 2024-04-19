@@ -1,18 +1,11 @@
 
-import pandas as pd
 import numpy as np
 from datetime import datetime
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_absolute_percentage_error
 from sklearn.preprocessing import PolynomialFeatures
-import os
 import pickle
-import shutil
 
 
-class plast():
+class plast:
   def __init__(self, date, well, press_zab):
     self.well = well
     self.date = date
@@ -21,7 +14,7 @@ class plast():
     if self.well == '"896Б"':
       self.well = '_896Б_'
 
-    with open(f"models/{self.well}", "rb") as file:
+    with open(f"reservoir/models/{self.well}", "rb") as file:
       self.loaded_models = pickle.load(file)
 
 

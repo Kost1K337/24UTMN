@@ -1,8 +1,8 @@
 from tensorflow.keras.models import load_model
 import joblib
 
-modelsPath = 'src/tube/assets/models'
-scalersPath = 'src/tube/assets/scalers'
+modelsPath = 'tube/assets/models'
+scalersPath = 'tube/assets/scalers'
 
 
 class SSiTModel:
